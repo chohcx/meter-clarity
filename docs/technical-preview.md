@@ -2,6 +2,12 @@
 
 This page is prepared for the future `v0.1.0 Technical Preview`. The repository and build remain private until every private-rebuild gate in the roadmap is complete.
 
+## Validation maturity
+
+The preview has reproducible golden tests for public examples from all three supported providers and an observed keyboard-only NVDA 2026.1.1 run of the synthetic-data workflow. That NVDA run found a missing result announcement; commit `25d2060` fixed it, and the passing rerun announced the estimate, local save, backup download, and restore.
+
+There are currently **zero real-household validation cases and zero observed complete live billing cycles**. This preview must not be described as stable or as validated against household bills. The official provider bill remains authoritative. Public preview users may opt in to de-identified discrepancy reports; those reports are evidence to investigate, not proof of correctness by themselves.
+
 ## Official sources
 
 - Taipower residential non-time-of-use tariff: [official open-data JSON](https://service.taipower.com.tw/data/opendata/apply/file/d007008/001.json).
@@ -54,4 +60,4 @@ Any replacement public-preview recording must follow this script using synthetic
 
 The future public repository's **Bill difference** issue form is the only planned collection path. It is user-initiated, requires an explicit de-identification confirmation, and is not linked to application telemetry. Reports should contain only provider, tariff plan, dates, usage, optional line-item amounts, app estimate, official total, and the difference.
 
-Person-led accessibility and maintainer bill checks must use the repository's [manual verification procedure](manual-verification.md).
+Assistive-technology evidence and any future de-identified household checks must use the repository's [manual verification procedure](manual-verification.md).

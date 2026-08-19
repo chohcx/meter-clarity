@@ -1,8 +1,8 @@
 # Manual verification
 
-These checks require evidence from a person or a real billing cycle and cannot be replaced by automated tests. Never commit or attach a bill, screenshot, address, name, account or meter number, barcode, payment identifier, or credential.
+These checks supplement automated tests with observed assistive-technology output or a real billing cycle. Never commit or attach a bill, screenshot, address, name, account or meter number, barcode, payment identifier, or credential.
 
-## Person-led screen-reader audit
+## Observed screen-reader audit
 
 Record the date, MeterClarity commit, operating system, browser version, screen reader and version, then complete this workflow without a mouse:
 
@@ -11,13 +11,22 @@ Record the date, MeterClarity commit, operating system, browser version, screen 
 3. Confirm the current estimate, forecast, line items, assumptions, errors, and success messages are announced in a useful order.
 4. Reach every official source link and the encrypted-backup controls.
 5. Export and restore a synthetic-data backup.
-6. Repeat at 200% browser zoom and with the screen reader's browse and forms modes where available.
+6. Record any zoom, browse-mode, and forms-mode coverage that was actually exercised; do not infer it from automated checks.
 
-For each defect, record a GitHub issue URL and whether it blocks the Technical Preview. The audit is complete only when no blocking defect remains and the result is added to the table below.
+For each defect, record a GitHub issue URL and whether it blocks the Technical Preview. The observed audit is complete only when the core workflow has been exercised with actual screen-reader output, no blocking defect remains, and the result is added below. A blind-user usability review and a 200% browser-zoom screen-reader pass remain recommended follow-up work; they are not represented by this record.
 
 | Date | Commit | OS / browser | Screen reader | Result | Blocking issues |
 | --- | --- | --- | --- | --- | --- |
-| Pending | — | — | — | Not run | — |
+| 2026-08-19 | `25d2060c025cac03a7adbdaa040257b5d045a431` | Windows 11 / Chromium 151.0.7922.34 | NVDA 2026.1.1, zh-TW, minimal mode | Pass after persistent live-status fix; synthetic data, keyboard-only core flow, standard browser zoom | None |
+
+Sanitized NVDA speech evidence from the passing run:
+
+- “估算完成。目前估算新臺幣 708 元，已使用 350 度電；帳期預測新臺幣 1650 元，範圍新臺幣 1422 至 1916 元。”
+- “這次讀值已儲存在此裝置”
+- “加密備份已下載”
+- “備份已還原”
+
+The run also reached the electricity and water selectors, date and reading fields, assumptions, all three official-source links, and encrypted-backup controls. The first run exposed that a dynamically inserted live region did not announce the estimate or first save notice. Commit `25d2060` keeps one status region mounted and updates its text; a second NVDA run confirmed all four messages above. The raw log is intentionally not committed because it contained unrelated desktop-window text. This was an agent-assisted inspection of actual NVDA I/O, not a blind-user usability study.
 
 ## De-identified real-bill validation
 
@@ -35,4 +44,4 @@ Validation procedure:
 4. Explain every non-zero difference as rounding, a user-supplied local charge, an unsupported rule, a defect, or an unresolved discrepancy.
 5. Open a focused issue for defects or unresolved discrepancies without including the source bill or identifiers.
 
-The Private Rebuild gate requires maintainer-owned, redacted billing cycles covering the core workflow. The Stable gate separately requires at least ten real households across all three supported providers and complete billing cycles.
+The Technical Preview has zero real-household cases and does not claim live-bill accuracy. Its pre-public correctness evidence is limited to reproducible official-provider examples. The Stable gate requires at least ten real households across all three supported providers and complete billing cycles.
