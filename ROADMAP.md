@@ -7,9 +7,10 @@
 - [x] Add official Taipower and Taipei Water golden examples.
 - [x] Add local-only PWA workflow and encrypted backup.
 - [ ] Add a complete official Taiwan Water bill example.
+- [x] Verify encrypted restore, persistence, accessible control names, keyboard focus, and offline reload in desktop Chrome.
 - [ ] Add restore migration tests in a real browser.
 - [ ] Complete keyboard, screen-reader, contrast, and offline audits.
-- [ ] Complete dependency and application security reviews.
+- [x] Complete dependency and application security reviews and fix the confirmed backup-state integrity issue.
 - [ ] Verify the core workflow with the maintainer's real, redacted billing cycles.
 
 ## v0.1.0 Technical Preview

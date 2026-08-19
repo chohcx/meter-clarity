@@ -36,7 +36,7 @@ npm run check
 - 畫面永遠分開「目前估算」、「帳期預測」與「正式帳單」。
 - 地方清除、污水、加壓、折扣等不確定項目必須由使用者依帳單提供，不偷偷假設。
 
-詳見 [架構](docs/architecture.md)、[費率維護](docs/tariffs.md)與[支援範圍](docs/coverage.md)。
+詳見 [架構](docs/architecture.md)、[費率維護](docs/tariffs.md)、[驗證紀錄](docs/verification.md)與[支援範圍](docs/coverage.md)。
 
 ## 公開門檻
 
