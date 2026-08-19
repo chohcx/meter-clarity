@@ -22,11 +22,12 @@ English documentation: [docs/README.en.md](docs/README.en.md)
 
 ```sh
 npm install
+npx playwright install chromium
 npm run dev
 npm run check
 ```
 
-`npm run check` 會依序執行 TypeScript、單元測試及 production build。
+`npm run check` 會依序執行 TypeScript、單元測試、production build，以及桌面／手機 Chromium 的備份還原、離線與 WCAG 自動檢查。
 
 ## 正確性原則
 

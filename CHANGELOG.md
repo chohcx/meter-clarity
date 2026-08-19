@@ -10,3 +10,4 @@ All notable changes to the private rebuild will be documented here.
 - Added exact scaled-integer tariff calculations for Taipower, Taiwan Water, and Taipei Water.
 - Added official golden examples, local persistence, encrypted backups, offline assets, CI, and tariff source monitoring.
 - Added deep backup-state validation and rejected estimates outside each bundled tariff's effective period.
+- Added desktop/mobile Playwright coverage for encrypted restore, offline use, keyboard access, and WCAG checks; fixed the issues found by the first run.
