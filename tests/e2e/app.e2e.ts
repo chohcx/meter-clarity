@@ -46,6 +46,9 @@ test("meets automated WCAG checks and exposes restore to the keyboard", async ({
   const analyze = () => new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"])
     .analyze();
+  const liveStatus = page.getByTestId("live-status");
+  await expect(liveStatus).toBeAttached();
+  await expect(liveStatus).toHaveText("");
   await expect(page.getByText(/未加密形式存在這個瀏覽器設定檔/)).toBeVisible();
   expect((await analyze()).violations).toEqual([]);
 
@@ -53,6 +56,9 @@ test("meets automated WCAG checks and exposes restore to the keyboard", async ({
   await page.getByLabel("目前讀值").fill("1300");
   await page.getByRole("button", { name: "計算本期估算" }).click();
   await expect(page.locator(".results")).toBeVisible();
+  await expect(liveStatus).toContainText("估算完成。目前估算新臺幣");
+  await page.getByRole("button", { name: "儲存這次讀值" }).click();
+  await expect(liveStatus).toHaveText("這次讀值已儲存在此裝置");
   expect((await analyze()).violations).toEqual([]);
 
   await page.getByRole("button", { name: /水費/ }).click();

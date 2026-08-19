@@ -76,7 +76,7 @@ function calculate(form: CalculatorForm): Calculation {
 function ResultCard({ calculation, commodity }: { calculation: Calculation; commodity: Commodity }) {
   const unit = commodity === "electricity" ? "度電" : "度水";
   return (
-    <section className="results" aria-live="polite">
+    <section className="results">
       <div className="result-card primary-result">
         <span className="eyebrow">截至目前 · 估算</span>
         <strong>NT$ {integerFormat.format(calculation.current.totalNtd)}</strong>
@@ -187,6 +187,10 @@ export default function App() {
   const meterOptions = form.waterProvider === "taipei-water"
     ? ["13", "20", "25", "40", "50", "75", "100", "150", "200", "250", "300+"]
     : ["13", "20", "25", "40", "50", "75", "100", "150", "200", "250", "300", "350", "400+"];
+  const unit = form.commodity === "electricity" ? "度電" : "度水";
+  const liveMessage = notice || (calculation
+    ? `估算完成。目前估算新臺幣 ${calculation.current.totalNtd} 元，已使用 ${calculation.usage} ${unit}；帳期預測新臺幣 ${calculation.projected.totalNtd} 元，範圍新臺幣 ${calculation.projectedLow.totalNtd} 至 ${calculation.projectedHigh.totalNtd} 元。`
+    : "");
 
   return (
     <>
@@ -277,8 +281,9 @@ export default function App() {
               </details>
             )}
 
+            <div className="sr-only" role="status" aria-live="polite" aria-atomic="true" data-testid="live-status">{liveMessage}</div>
             {error && <div className="message error" role="alert">{error}</div>}
-            {notice && <div className="message success" role="status">{notice}</div>}
+            {notice && <div className="message success">{notice}</div>}
             <button className="calculate-button" type="submit">計算本期估算</button>
             <p className="form-note">估算不等於正式帳單；每筆結果都會顯示費率來源與限制。</p>
           </form>
