@@ -1,0 +1,17 @@
+[
+  {
+    "id": "taipower-residential-non-tou",
+    "url": "https://service.taipower.com.tw/data/opendata/apply/file/d007008/001.json",
+    "requiredText": ["2025-10-01", "120度以下部分", "1.78", "8.86"]
+  },
+  {
+    "id": "taipei-water",
+    "url": "https://www.water.gov.taipei/News_Content.aspx?n=30E4EDA27F6D9953&s=451916B5DE7ECE31",
+    "requiredText": ["自105年3月1日起", "6.7", "8.5", "14.0", "20.0"]
+  },
+  {
+    "id": "taiwan-water",
+    "url": "https://investtaiwan.nat.gov.tw/showPagecht95?lang=cht&search=95",
+    "requiredText": ["台灣自來水公司", "7.35", "9.45", "11.55", "12.075"]
+  }
+]

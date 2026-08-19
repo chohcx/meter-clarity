@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+.codebase-memory/
+tmp/
+*.local
+*.tsbuildinfo
+.env*
+!.env.example

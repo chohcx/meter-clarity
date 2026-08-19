@@ -1,0 +1,24 @@
+name: Bug report
+description: Report a reproducible MeterClarity problem.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Do not include an address, meter number, account number, or unredacted bill.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual result
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: MeterClarity version
+    validations:
+      required: true
