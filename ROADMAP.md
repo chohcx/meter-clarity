@@ -9,6 +9,7 @@
 - [x] Add a complete official Taiwan Water bill example.
 - [x] Verify encrypted restore, persistence, accessible control names, keyboard focus, and offline reload in desktop Chrome.
 - [x] Add repeatable desktop and mobile browser tests for encrypted restore, offline reload, keyboard access, and WCAG contrast.
+- [x] Prepare a person-led accessibility checklist and de-identified real-bill validation log.
 - [ ] Complete a manual screen-reader audit.
 - [x] Complete dependency and application security reviews and fix the confirmed backup-state integrity issue.
 - [ ] Verify the core workflow with the maintainer's real, redacted billing cycles.

@@ -51,3 +51,5 @@ The public-preview recording must follow this script using synthetic readings an
 ## Opt-in discrepancy reports
 
 The future public repository's **Bill difference** issue form is the only planned collection path. It is user-initiated, requires an explicit de-identification confirmation, and is not linked to application telemetry. Reports should contain only provider, tariff plan, dates, usage, optional line-item amounts, app estimate, official total, and the difference.
+
+Person-led accessibility and maintainer bill checks must use the repository's [manual verification procedure](manual-verification.md).
