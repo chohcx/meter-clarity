@@ -2,7 +2,7 @@
 
 > 帳單來之前，先看懂本期水電用了多少、大約多少錢，以及資料有多新。
 
-MeterClarity 是一個 local-first、可安裝、可離線使用的水電費估算 PWA。目前仍是**私有重建版本**，尚未公開，也不代表台電、台灣自來水公司或臺北自來水事業處。
+MeterClarity 是一個 local-first、可安裝、可離線使用的水電費估算 PWA。目前是 **v0.1.0 Technical Preview**，不代表台電、台灣自來水公司或臺北自來水事業處。
 
 English documentation: [docs/README.en.md](docs/README.en.md)
 

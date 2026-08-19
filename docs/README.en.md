@@ -2,7 +2,7 @@
 
 MeterClarity is a local-first, installable utility usage and cost estimator. It starts with Taiwan household electricity and water while keeping the core model provider-neutral.
 
-This repository is currently a **private rebuild**. It is not affiliated with or endorsed by Taipower, Taiwan Water Corporation, or Taipei Water Department. Estimates are not official bills.
+This repository is a **v0.1.0 Technical Preview**. It is not affiliated with or endorsed by Taipower, Taiwan Water Corporation, or Taipei Water Department. Estimates are not official bills.
 
 ## Supported now
 

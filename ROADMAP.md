@@ -17,7 +17,7 @@
 ## v0.1.0 Technical Preview
 
 - [x] Prepare a single disclosure page covering sources, assumptions, unsupported cases, and privacy limitations.
-- [ ] Publish all sources, assumptions, unsupported cases, and privacy limitations.
+- [x] Publish all sources, assumptions, unsupported cases, and privacy limitations.
 - [x] Prepare a reproducible, synthetic-data 60-second demo script.
 - [x] Demonstrate the main manual-reading flow in about 60 seconds using synthetic data.
 - [x] Prepare an opt-in discrepancy issue form with mandatory de-identification confirmation and no application telemetry.
