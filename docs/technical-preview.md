@@ -1,6 +1,6 @@
 # Technical Preview disclosures
 
-This page is prepared for the future `v0.1.0 Technical Preview`. The repository and build remain private until every private-rebuild gate in the roadmap is complete.
+This page defines the evidence and limitations of the public `v0.1.0 Technical Preview`.
 
 ## Validation maturity
 
@@ -43,7 +43,7 @@ The active source URLs, retrieval dates, effective dates, and immutable rule ver
 
 ## Reproducible 60-second demo script
 
-[Watch the 59-second synthetic-data private-build demo (WebM)](assets/meterclarity-60-second-demo.webm). It was recorded at 1280×720 from the production build and contains no real bill, account, browser-profile, or personal data.
+[Watch the 59-second synthetic-data Technical Preview demo (WebM)](assets/meterclarity-60-second-demo.webm). It was recorded at 1280×720 from the production build and contains no real bill, account, browser-profile, or personal data.
 
 | Time | Action and narration |
 | --- | --- |
@@ -58,6 +58,6 @@ Any replacement public-preview recording must follow this script using synthetic
 
 ## Opt-in discrepancy reports
 
-The future public repository's **Bill difference** issue form is the only planned collection path. It is user-initiated, requires an explicit de-identification confirmation, and is not linked to application telemetry. Reports should contain only provider, tariff plan, dates, usage, optional line-item amounts, app estimate, official total, and the difference.
+The public repository's **Bill difference** issue form is the only planned collection path. It is user-initiated, requires an explicit de-identification confirmation, and is not linked to application telemetry. Reports should contain only provider, tariff plan, dates, usage, optional line-item amounts, app estimate, official total, and the difference.
 
 Assistive-technology evidence and any future de-identified household checks must use the repository's [manual verification procedure](manual-verification.md).
