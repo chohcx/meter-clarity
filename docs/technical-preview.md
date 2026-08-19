@@ -37,6 +37,8 @@ The active source URLs, retrieval dates, effective dates, and immutable rule ver
 
 ## Reproducible 60-second demo script
 
+[Watch the 59-second synthetic-data private-build demo (WebM)](assets/meterclarity-60-second-demo.webm). It was recorded at 1280×720 from the production build and contains no real bill, account, browser-profile, or personal data.
+
 | Time | Action and narration |
 | --- | --- |
 | 0–8 s | Open MeterClarity and state that it is a local-first estimate, not an official bill. |
@@ -46,7 +48,7 @@ The active source URLs, retrieval dates, effective dates, and immutable rule ver
 | 42–52 s | Open **估算依據與限制**, then point to the active tariff version and official source links. |
 | 52–60 s | Save the reading locally and show the encrypted-backup controls and unencrypted-browser-storage warning. |
 
-The public-preview recording must follow this script using synthetic readings and must not show a real bill, browser profile, download path, or personal identifier.
+Any replacement public-preview recording must follow this script using synthetic readings and must not show a real bill, browser profile, download path, or personal identifier.
 
 ## Opt-in discrepancy reports
 

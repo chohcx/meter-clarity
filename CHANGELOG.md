@@ -14,3 +14,4 @@ All notable changes to the private rebuild will be documented here.
 - Added a complete Taiwan Water official sample-bill fixture and independently monitored its source page.
 - Added Technical Preview disclosures, a reproducible 60-second demo script, explicit local-storage risks, and a privacy-gated discrepancy form.
 - Added person-led screen-reader and de-identified real-bill verification procedures.
+- Added a verified 59-second private-build demo using synthetic readings and no personal data.
