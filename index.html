@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>電費計算機</title>
+    <title>台灣水電費分攤工具</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -79,8 +79,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
             </button>
 
-            <h1 class="text-xl font-bold text-white tracking-wide">電費計算機</h1>
-            <p class="text-slate-400 text-sm mt-1">自動計算度數與分攤金額</p>
+            <h1 class="text-xl font-bold text-white tracking-wide">水電費分攤工具</h1>
+            <p class="text-slate-400 text-sm mt-1">按實際用量公平分攤帳單</p>
             
             <!-- 右上角：歷史紀錄按鈕 -->
             <button onclick="toggleHistory()" class="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-white transition rounded-full hover:bg-slate-700" title="歷史紀錄">
@@ -90,13 +90,21 @@
 
         <!-- 輸入表單 -->
         <div class="p-6 space-y-6">
+            <div>
+                <label for="utilityType" class="block text-sm font-bold text-gray-600 mb-2">帳單類型</label>
+                <select id="utilityType" onchange="changeUtility(this.value)"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-slate-500 focus:outline-none focus:bg-white transition text-slate-800">
+                    <option value="electricity">⚡ 電費</option>
+                    <option value="water">💧 水費</option>
+                </select>
+            </div>
             
             <!-- 帳單總金額 -->
             <div>
                 <label class="block text-sm font-bold text-gray-600 mb-2">本期帳單總金額 ($)</label>
                 <div class="relative">
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span>
-                    <input type="number" inputmode="decimal" id="totalBill" placeholder="例如: 2800" 
+                    <input type="number" inputmode="decimal" min="0" id="totalBill" placeholder="例如: 2800"
                         class="w-full pl-8 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-slate-500 focus:outline-none focus:bg-white transition text-lg font-medium text-slate-800 placeholder-gray-300">
                 </div>
             </div>
@@ -106,11 +114,15 @@
             <!-- 房間度數輸入區 -->
             <div>
                 <div class="flex justify-between items-end mb-2">
-                    <label class="block text-sm font-bold text-gray-600">各房電表度數</label>
+                    <label id="meterLabel" class="block text-sm font-bold text-gray-600">各房電表度數</label>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="removeRoom()" class="text-xs text-slate-500 hover:text-slate-800" aria-label="移除最後一個分表">− 移除</button>
+                        <button type="button" onclick="addRoom()" class="text-xs font-bold text-emerald-600 hover:text-emerald-800" aria-label="新增分表">＋ 新增</button>
+                    </div>
                 </div>
                 
                 <div class="grid grid-cols-12 gap-2 text-xs text-gray-400 text-center mb-1 px-1">
-                    <div class="col-span-2 text-left">房間</div>
+                    <div class="col-span-2 text-left">名稱</div>
                     <div class="col-span-5">上期度數</div>
                     <div class="col-span-5">本期度數</div>
                 </div>
@@ -134,12 +146,12 @@
             <!-- 總計卡片 -->
             <div class="bg-white border border-gray-200 rounded-xl p-4 mb-6 shadow-sm">
                 <div class="flex justify-between items-center mb-2">
-                    <span class="text-sm text-gray-500">總用電量</span>
-                    <span class="text-lg font-bold text-slate-700"><span id="totalUsageDisplay">0</span> 度</span>
+                    <span id="totalUsageLabel" class="text-sm text-gray-500">總用電量</span>
+                    <span class="text-lg font-bold text-slate-700"><span id="totalUsageDisplay">0</span> <span id="totalUsageUnit">度</span></span>
                 </div>
                 <div class="flex justify-between items-center pt-2 border-t border-dashed border-gray-100">
-                    <span class="text-sm text-gray-500">平均電價</span>
-                    <span class="text-xl font-bold text-emerald-600">$<span id="unitPriceDisplay">0</span> / 度</span>
+                    <span id="averagePriceLabel" class="text-sm text-gray-500">平均電價</span>
+                    <span class="text-xl font-bold text-emerald-600">$<span id="unitPriceDisplay">0</span> / <span id="averagePriceUnit">度</span></span>
                 </div>
             </div>
 
@@ -153,12 +165,12 @@
                 <div class="grid grid-cols-1 gap-3">
                     <div>
                         <label class="block text-xs font-bold text-gray-500 mb-1">期數 / 月份 (選填)</label>
-                        <input type="text" id="recordPeriod" placeholder="例如: 112-05 或 5-6月" 
+                        <input type="text" id="recordPeriod" maxlength="100" placeholder="例如: 112-05 或 5-6月"
                             class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-slate-400 transition placeholder-gray-300">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-500 mb-1">備註 (選填)</label>
-                        <input type="text" id="recordNote" placeholder="例如: 已繳清、多退少補..." 
+                        <input type="text" id="recordNote" maxlength="500" placeholder="例如: 已繳清、多退少補..."
                             class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-slate-400 transition placeholder-gray-300">
                     </div>
                 </div>
@@ -197,8 +209,9 @@
         </div>
     </div>
 
-    <footer class="mt-8 text-xs text-gray-400">
-        資料儲存於您的瀏覽器中，不會上傳伺服器
+    <footer class="mt-8 text-xs text-gray-400 text-center space-y-1">
+        <p>資料儲存於您的瀏覽器中，不會上傳伺服器</p>
+        <p><a class="underline hover:text-slate-600" href="https://github.com/chohcx/electric-bill" target="_blank" rel="noopener noreferrer">原始碼</a> · <a class="underline hover:text-slate-600" href="https://github.com/chohcx/electric-bill/issues/new/choose" target="_blank" rel="noopener noreferrer">回報問題或建議</a> · <a class="underline hover:text-slate-600" href="https://github.com/chohcx/electric-bill/issues/new?template=usage_feedback.yml" target="_blank" rel="noopener noreferrer">分享使用經驗</a></p>
     </footer>
 
     <!-- 歷史紀錄側邊欄 (Modal) (層級 50) -->
@@ -258,21 +271,69 @@
                     <input type="file" id="importFile" accept=".json" class="hidden" onchange="importData(this)">
                 </label>
             </div>
-            <p class="text-xs text-center text-gray-300 mt-2">v1.6</p>
+            <p class="text-xs text-center text-gray-300 mt-2">v1.7</p>
         </div>
     </div>
 
+    <script src="src/allocation.js"></script>
+    <script src="src/history.js"></script>
     <script>
-        const rooms = ['A', 'B', 'C', 'D', 'E'];
-        let currentResultData = null; 
+        let rooms = ['A', 'B', 'C', 'D', 'E'];
+        const utilities = {
+            electricity: { icon: '⚡', label: '電費', meter: '電表', usage: '用電量', average: '平均電價', unit: '度' },
+            water: { icon: '💧', label: '水費', meter: '水表', usage: '用水量', average: '平均水價', unit: '度' }
+        };
+        const historyKey = 'utility_history_records';
+        const legacyHistoryKey = 'elec_history_records';
+        let currentUtility = 'electricity';
+        let currentResultData = null;
         let isEditMode = false;
         let selectedIds = new Set();
         let confirmCallback = null;
 
         document.addEventListener('DOMContentLoaded', () => {
             renderRoomInputs();
+            updateUtilityUI();
             loadLastReadingsFromHistory();
         });
+
+        function readHistory() {
+            try {
+                const current = localStorage.getItem(historyKey);
+                const stored = current === null ? localStorage.getItem(legacyHistoryKey) : current;
+                if (stored === null) return [];
+
+                const history = normalizeHistory(JSON.parse(stored));
+                if (current === null) writeHistory(history);
+                return history;
+            } catch (error) {
+                console.warn('無法讀取歷史紀錄', error);
+                return [];
+            }
+        }
+
+        function writeHistory(history) {
+            localStorage.setItem(historyKey, JSON.stringify(normalizeHistory(history)));
+        }
+
+        function updateUtilityUI() {
+            const utility = utilities[currentUtility];
+            document.getElementById('utilityType').value = currentUtility;
+            document.getElementById('meterLabel').innerText = `各房${utility.meter}度數`;
+            document.getElementById('totalUsageLabel').innerText = `總${utility.usage}`;
+            document.getElementById('totalUsageUnit').innerText = utility.unit;
+            document.getElementById('averagePriceLabel').innerText = utility.average;
+            document.getElementById('averagePriceUnit').innerText = utility.unit;
+        }
+
+        function changeUtility(value) {
+            if (!utilities[value] || value === currentUtility) return;
+            currentUtility = value;
+            clearReadingsWithoutConfirm();
+            updateUtilityUI();
+            loadLastReadingsFromHistory();
+            showToast(`已切換為${utilities[currentUtility].label}`);
+        }
 
         // --- 確認視窗 ---
         function showConfirm(title, message, callback) {
@@ -309,19 +370,23 @@
         };
 
         // --- 主要邏輯 ---
-        function renderRoomInputs() {
+        function renderRoomInputs(details = []) {
             const container = document.getElementById('roomsContainer');
             let html = '';
             rooms.forEach((room, index) => {
+                const detail = details[index] || {};
                 html += `
                 <div class="grid grid-cols-12 gap-2 items-center bg-gray-50 p-2 rounded-lg border border-transparent focus-within:border-slate-300 focus-within:bg-white transition-colors">
-                    <div class="col-span-2 font-bold text-slate-600 pl-1">${room}</div>
+                    <div class="col-span-2">
+                        <input type="text" maxlength="30" id="name_${index}" value="${escapeHtml(detail.name ?? room)}" aria-label="第 ${index + 1} 個分表名稱"
+                            class="w-full bg-transparent border-b border-gray-300 focus:border-slate-500 focus:outline-none py-1 text-center font-bold text-slate-600 text-sm">
+                    </div>
                     <div class="col-span-5">
-                        <input type="number" inputmode="decimal" id="prev_${index}" placeholder="舊" 
+                        <input type="number" inputmode="decimal" min="0" id="prev_${index}" value="${detail.prev ?? ''}" placeholder="舊" aria-label="${escapeHtml(detail.name ?? room)} 上期度數"
                             class="w-full bg-transparent border-b border-gray-300 focus:border-slate-500 focus:outline-none py-1 px-1 text-center text-gray-600 text-sm">
                     </div>
                     <div class="col-span-5">
-                        <input type="number" inputmode="decimal" id="curr_${index}" placeholder="新" 
+                        <input type="number" inputmode="decimal" min="0" id="curr_${index}" value="${detail.curr ?? ''}" placeholder="新" aria-label="${escapeHtml(detail.name ?? room)} 本期度數"
                             class="w-full bg-transparent border-b border-gray-300 focus:border-emerald-500 focus:outline-none py-1 px-1 text-center text-slate-800 font-bold text-sm">
                     </div>
                 </div>`;
@@ -329,10 +394,37 @@
             container.innerHTML = html;
         }
 
+        function addRoom() {
+            if (rooms.length >= 50) {
+                showToast('最多可使用 50 個分表');
+                return;
+            }
+            rooms.push(rooms.length < 26 ? String.fromCharCode(65 + rooms.length) : `分表 ${rooms.length + 1}`);
+            renderRoomInputs(readRoomInputs());
+        }
+
+        function removeRoom() {
+            if (rooms.length === 1) {
+                showToast('至少需要一個分表');
+                return;
+            }
+            rooms.pop();
+            renderRoomInputs(readRoomInputs().slice(0, rooms.length));
+        }
+
+        function readRoomInputs() {
+            return rooms.map((room, index) => ({
+                name: document.getElementById(`name_${index}`)?.value.trim() || room,
+                prev: document.getElementById(`prev_${index}`)?.value ?? '',
+                curr: document.getElementById(`curr_${index}`)?.value ?? ''
+            }));
+        }
+
         function loadLastReadingsFromHistory() {
-            const history = JSON.parse(localStorage.getItem('elec_history_records') || '[]');
-            if (history.length > 0) {
-                const latestRecord = history[0];
+            const latestRecord = readHistory().find(record => record.utility === currentUtility);
+            if (latestRecord) {
+                rooms = latestRecord.details.map(detail => detail.name);
+                renderRoomInputs();
                 let hasAutoFilled = false;
                 latestRecord.details.forEach((detail, index) => {
                     const prevInput = document.getElementById(`prev_${index}`);
@@ -342,7 +434,7 @@
                     }
                 });
                 if (hasAutoFilled) {
-                    showToast(`已自動帶入 ${latestRecord.date} 的度數`);
+                    showToast(`已自動帶入 ${latestRecord.date} 的${utilities[currentUtility].meter}度數`);
                 }
             }
         }
@@ -359,26 +451,34 @@
             let isValid = true;
 
             rooms.forEach((room, index) => {
+                const name = document.getElementById(`name_${index}`).value.trim() || `分表 ${index + 1}`;
                 const prev = parseFloat(document.getElementById(`prev_${index}`).value) || 0;
                 const curr = parseFloat(document.getElementById(`curr_${index}`).value) || 0;
                 const usage = curr - prev;
-                
+
+                if (prev < 0 || curr < 0) {
+                    alert(`${name} 的度數不能是負數`);
+                    isValid = false;
+                    return;
+                }
+
                 if (usage < 0) {
-                    alert(`房間 ${room} 的度數異常！\n本期 (${curr}) 不能小於上期 (${prev})`);
+                    alert(`${name} 的度數異常！\n本期 (${curr}) 不能小於上期 (${prev})`);
                     isValid = false;
                     return;
                 }
                 totalUsage += usage;
-                roomDetails.push({ name: room, usage: usage, prev, curr });
+                roomDetails.push({ name, usage: usage, prev, curr });
             });
 
             if (!isValid) return;
             if (totalUsage === 0) {
-                showToast('總用電量為 0，無法計算');
+                showToast(`總${utilities[currentUtility].usage}為 0，無法計算`);
                 return;
             }
 
-            const unitPrice = billTotal / totalUsage;
+            const result = allocateBill(billTotal, roomDetails);
+            const unitPrice = result.unitPrice;
 
             document.getElementById('totalUsageDisplay').innerText = totalUsage;
             document.getElementById('unitPriceDisplay').innerText = unitPrice.toFixed(2);
@@ -386,23 +486,23 @@
             const listContainer = document.getElementById('breakdownList');
             listContainer.innerHTML = '';
 
-            const computedDetails = roomDetails.map(room => {
-                const cost = Math.round(room.usage * unitPrice);
+            const computedDetails = result.details;
+            computedDetails.forEach(room => {
                 listContainer.innerHTML += `
                 <div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
                     <div class="flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-sm">${room.name}</span>
+                            <span class="min-w-8 h-8 px-2 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-sm">${escapeHtml(room.name)}</span>
                         <div class="flex flex-col">
-                            <span class="text-xs text-gray-400">使用 ${room.usage} 度</span>
+                            <span class="text-xs text-gray-400">使用 ${room.usage} ${utilities[currentUtility].unit}</span>
                         </div>
                     </div>
-                    <span class="font-bold text-slate-700">$${cost}</span>
+                    <span class="font-bold text-slate-700">$${room.cost}</span>
                 </div>`;
-                return { ...room, cost };
             });
 
             currentResultData = {
                 id: Date.now(),
+                utility: currentUtility,
                 date: new Date().toLocaleDateString('zh-TW'),
                 billTotal,
                 totalUsage,
@@ -468,24 +568,19 @@
             
             // 顯示確認視窗，避免誤按覆蓋當前資料
             showConfirm('帶入資料', '確定要將這筆歷史紀錄填入計算機嗎？(目前的輸入將被覆蓋)', () => {
-                const history = JSON.parse(localStorage.getItem('elec_history_records') || '[]');
-                const record = history.find(r => r.id === id);
-                
+                const record = readHistory().find(r => r.id === id);
+
                 if (record) {
+                    currentUtility = record.utility;
+                    updateUtilityUI();
+                    clearReadingsWithoutConfirm();
+                    rooms = record.details.map(detail => detail.name);
+                    renderRoomInputs(record.details);
+
                     // 1. 填入總金額
                     document.getElementById('totalBill').value = record.billTotal;
                     
-                    // 2. 填入各房間度數
-                    if (record.details && Array.isArray(record.details)) {
-                        record.details.forEach((detail, index) => {
-                            const prevInput = document.getElementById(`prev_${index}`);
-                            const currInput = document.getElementById(`curr_${index}`);
-                            if (prevInput) prevInput.value = detail.prev;
-                            if (currInput) currInput.value = detail.curr;
-                        });
-                    }
-
-                    // 3. 填入期數與備註 (如果有)
+                    // 2. 填入期數與備註 (如果有)
                     document.getElementById('recordPeriod').value = record.period || '';
                     document.getElementById('recordNote').value = record.note || '';
 
@@ -514,9 +609,9 @@
                 note: note
             };
 
-            let history = JSON.parse(localStorage.getItem('elec_history_records') || '[]');
+            let history = readHistory();
             history.unshift(recordToSave);
-            localStorage.setItem('elec_history_records', JSON.stringify(history));
+            writeHistory(history);
 
             const saveBtn = document.getElementById('saveBtn');
             saveBtn.innerHTML = `✓ 已儲存`;
@@ -571,9 +666,9 @@
             }
 
             showConfirm('刪除紀錄', `確定要刪除這 ${selectedIds.size} 筆紀錄嗎？`, () => {
-                let history = JSON.parse(localStorage.getItem('elec_history_records') || '[]');
+                let history = readHistory();
                 history = history.filter(item => !selectedIds.has(item.id));
-                localStorage.setItem('elec_history_records', JSON.stringify(history));
+                writeHistory(history);
                 
                 isEditMode = false;
                 selectedIds.clear();
@@ -585,7 +680,7 @@
 
         function renderHistoryList() {
             const container = document.getElementById('historyContainer');
-            const history = JSON.parse(localStorage.getItem('elec_history_records') || '[]');
+            const history = readHistory();
 
             if (history.length === 0) {
                 container.innerHTML = `<div class="text-center text-gray-400 mt-10 flex flex-col items-center gap-2"><svg class="w-10 h-10 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>尚無歷史紀錄</div>`;
@@ -594,6 +689,7 @@
 
             let html = '';
             history.forEach(item => {
+                const utility = utilities[item.utility];
                 const isSelected = selectedIds.has(item.id);
                 const checkboxHtml = isEditMode ? `
                     <div class="mr-3 flex-shrink-0">
@@ -605,7 +701,8 @@
                 const clickAction = isEditMode ? `toggleSelect(${item.id})` : `toggleDetail(${item.id})`;
                 
                 // 期數標籤 (若有填寫)
-                const periodBadge = item.period ? `<span class="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full font-bold mr-1">${item.period}</span>` : '';
+                const periodBadge = item.period ? `<span class="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full font-bold mr-1">${escapeHtml(item.period)}</span>` : '';
+                const utilityBadge = `<span class="bg-slate-200 text-slate-700 text-xs px-2 py-0.5 rounded-full font-bold">${utility.icon} ${utility.label}</span>`;
 
                 html += `
                 <div class="bg-white rounded-lg border ${isSelected && isEditMode ? 'border-emerald-500 ring-1 ring-emerald-500' : 'border-gray-200'} shadow-sm overflow-hidden mb-3 transition-all duration-200" onclick="${clickAction}">
@@ -614,13 +711,14 @@
                         <div class="flex-1 flex justify-between items-center">
                             <div>
                                 <div class="flex items-center flex-wrap gap-1 mb-0.5">
+                                    ${utilityBadge}
                                     ${periodBadge}
-                                    <span class="text-xs text-gray-400 font-medium">${item.date}</span>
+                                    <span class="text-xs text-gray-400 font-medium">${escapeHtml(item.date)}</span>
                                 </div>
                                 <div class="text-sm font-bold text-slate-700">總額: $${item.billTotal}</div>
                             </div>
                             <div class="flex items-center gap-2">
-                                 <span class="text-xs text-emerald-600 font-medium">$${item.unitPrice.toFixed(2)}/度</span>
+                                 <span class="text-xs text-emerald-600 font-medium">$${item.unitPrice.toFixed(2)}/${utility.unit}</span>
                                  ${!isEditMode ? `<svg id="icon-${item.id}" class="w-4 h-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>` : ''}
                             </div>
                         </div>
@@ -630,7 +728,7 @@
                         <div class="space-y-1 mb-3">
                             ${item.details.map(d => `
                                 <div class="flex justify-between text-gray-600">
-                                    <span>房 ${d.name} (${d.usage}度)</span>
+                                    <span>房 ${escapeHtml(d.name)} (${d.usage}${utility.unit})</span>
                                     <span class="font-bold text-slate-700">$${d.cost}</span>
                                 </div>
                             `).join('')}
@@ -638,7 +736,7 @@
                         
                         ${item.note ? `
                         <div class="mt-3 pt-3 border-t border-gray-100 text-xs text-gray-500 bg-gray-50 p-2 rounded">
-                            <span class="font-bold text-gray-600">備註：</span>${item.note}
+                            <span class="font-bold text-gray-600">備註：</span>${escapeHtml(item.note)}
                         </div>
                         ` : ''}
 
@@ -680,21 +778,22 @@
             
             const period = document.getElementById('recordPeriod').value.trim();
             const note = document.getElementById('recordNote').value.trim();
-            
-            let text = `⚡ 電費分算明細 ⚡\n`;
+            const utility = utilities[currentResultData.utility];
+
+            let text = `${utility.icon} ${utility.label}分攤明細 ${utility.icon}\n`;
             if (period) text += `📅 期數: ${period}\n`;
             text += `----------------\n`;
             text += `總金額: $${bill}\n`;
-            text += `總用電: ${totalUsage}度\n`;
-            text += `平均電價: $${unitPrice}/度\n`;
+            text += `總${utility.usage}: ${totalUsage}${utility.unit}\n`;
+            text += `${utility.average}: $${unitPrice}/${utility.unit}\n`;
             text += `----------------\n`;
             
             currentResultData.details.forEach(d => {
-                text += `🏠 房${d.name}: ${d.prev}--->${d.curr} (使用 ${d.usage} 度)\n`;
+                text += `🏠 房${d.name}: ${d.prev}--->${d.curr} (使用 ${d.usage} ${utility.unit})\n`;
             });
 
             text += `----------------\n`;
-            text += `(使用度數*平均電價)\n`;
+            text += `(使用度數 × ${utility.average})\n`;
 
             currentResultData.details.forEach(d => {
                 text += `🏠 房${d.name}: $${d.cost}\n`;
@@ -728,13 +827,12 @@
         }
 
         function exportData() {
-            const history = localStorage.getItem('elec_history_records') || '[]';
-            const backup = { history: JSON.parse(history), timestamp: new Date().toISOString() };
+            const backup = { schemaVersion: 2, history: readHistory(), timestamp: new Date().toISOString() };
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backup));
             const downloadAnchorNode = document.createElement('a');
             const dateStr = new Date().toISOString().split('T')[0];
             downloadAnchorNode.setAttribute("href", dataStr);
-            downloadAnchorNode.setAttribute("download", `家庭電費備份_${dateStr}.json`);
+            downloadAnchorNode.setAttribute("download", `家庭水電費備份_${dateStr}.json`);
             document.body.appendChild(downloadAnchorNode);
             downloadAnchorNode.click();
             downloadAnchorNode.remove();
@@ -743,11 +841,16 @@
         function importData(input) {
             const file = input.files[0];
             if (!file) return;
+            if (file.size > 2 * 1024 * 1024) {
+                showToast('備份檔案過大，無法匯入！');
+                input.value = '';
+                return;
+            }
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
                     const backup = JSON.parse(e.target.result);
-                    if (backup.history) localStorage.setItem('elec_history_records', JSON.stringify(backup.history));
+                    writeHistory(normalizeHistory(backup.history));
                     showToast('資料匯入成功！頁面將重新整理。');
                     setTimeout(() => location.reload(), 1000);
                 } catch (err) {

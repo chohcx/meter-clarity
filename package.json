@@ -1,0 +1,13 @@
+{
+  "name": "tw-utility-kit",
+  "version": "1.7.0",
+  "private": true,
+  "description": "Client-side water and electricity bill splitter for shared meters in Taiwan.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

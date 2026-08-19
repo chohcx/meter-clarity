@@ -1,0 +1,41 @@
+name: 錯誤回報
+description: 回報可重現的功能問題
+title: "[Bug] "
+body:
+  - type: dropdown
+    id: utility
+    attributes:
+      label: 帳單類型
+      options:
+        - 電費
+        - 水費
+        - 兩者皆有
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 問題說明
+      description: 請勿附上姓名、地址、帳號或真實帳單等個人資料。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 重現步驟
+      description: 請提供能重現問題的最小輸入與操作順序。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 預期結果
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: 瀏覽器與版本
+      placeholder: 例如 Chrome 140
+    validations:
+      required: true
