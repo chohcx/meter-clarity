@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MeterClarity">
+  <rect width="512" height="512" rx="112" fill="#0f766e"/>
+  <path d="M144 328a112 112 0 1 1 224 0" fill="none" stroke="#ccfbf1" stroke-width="36" stroke-linecap="round"/>
+  <path d="M256 328l72-88" stroke="#fbbf24" stroke-width="28" stroke-linecap="round"/>
+  <circle cx="256" cy="328" r="30" fill="#fff"/>
+</svg>

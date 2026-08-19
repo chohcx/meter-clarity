@@ -1,0 +1,27 @@
+[
+  {
+    "id": "taipower-residential-non-tou",
+    "url": "https://service.taipower.com.tw/data/opendata/apply/file/d007008/001.json",
+    "requiredText": ["2025-10-01", "120度以下部分", "1.78", "8.86"]
+  },
+  {
+    "id": "taipei-water",
+    "url": "https://www.water.gov.taipei/News_Content.aspx?n=30E4EDA27F6D9953&s=451916B5DE7ECE31",
+    "requiredText": ["自105年3月1日起", "6.7", "8.5", "14.0", "20.0"]
+  },
+  {
+    "id": "taiwan-water-basic-fees",
+    "url": "https://www.water.gov.tw/opendata/syst4.csv",
+    "requiredText": ["13mm", "17.85", "5,301.45", "18,599.70", "29,184.75", "58,119.60"]
+  },
+  {
+    "id": "taiwan-water-usage-rates",
+    "url": "https://www.water.gov.tw/ch/Subject/Detail/1288?nodeId=813",
+    "requiredText": ["7.35", "9.45", "11.55", "12.075", "1107.75", "水源保育與回饋費"]
+  },
+  {
+    "id": "taiwan-water-sample-bill",
+    "url": "https://www.water.gov.tw/ch/Subject/Detail/108068?nodeId=813",
+    "requiredText": ["如何閱讀水費帳單", "水費帳單正面", "2025/08/26"]
+  }
+]
