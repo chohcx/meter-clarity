@@ -31,6 +31,20 @@ describe("Taiwan water tariffs", () => {
     expect(result.lineItems[0].amountNtd).toBe(1108);
   });
 
+  it("matches Taiwan Water's complete official sample bill", () => {
+    const result = estimateWater({
+      provider: "taiwan-water",
+      usageM3: 46,
+      meterDiameterMm: "20",
+      billingMonths: 2,
+      asOf: "2025-02-26",
+      // Official sample: NT$126 cleanup charge minus NT$5 e-bill rebate.
+      otherNtd: 121
+    });
+    expect(result.lineItems.map((item) => item.amountNtd)).toEqual([393, 71, 19, 121]);
+    expect(result.totalNtd).toBe(604);
+  });
+
   it("matches Taipei Water's official 25 m3, 20 mm, sewer-connected example", () => {
     const result = estimateWater({
       provider: "taipei-water",

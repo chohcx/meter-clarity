@@ -52,6 +52,11 @@ export const taiwanWaterCurrent: TariffVersion<WaterRules> = {
       title: "台灣自來水公司：水費及各項服務費收費標準",
       url: "https://www.water.gov.tw/ch/Subject/Detail/1288?nodeId=813",
       retrievedAt: "2026-08-19"
+    },
+    {
+      title: "台灣自來水公司：如何閱讀水費帳單（官方樣張）",
+      url: "https://www.water.gov.tw/ch/Subject/Detail/108068?nodeId=813",
+      retrievedAt: "2026-08-19"
     }
   ]
 };

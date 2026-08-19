@@ -5,7 +5,7 @@ Last reviewed: 2026-08-19.
 | Provider | Tariff | Manual reading | Official interval API | Status |
 | --- | --- | --- | --- | --- |
 | Taipower | Residential non-TOU | Yes | No public third-party household API found | Implemented, private validation |
-| Taiwan Water | General base tariff | Yes | No nationwide household API found | Implemented, needs full official bill fixture |
+| Taiwan Water | General base tariff | Yes | No nationwide household API found | Implemented, official sample tested |
 | Taipei Water | General base tariff | Yes | No published third-party API found | Implemented, official example tested |
 | Kinmen Water | Not implemented | Planned | Not evaluated | Coverage record only |
 | Matsu Water | Not implemented | Planned | Not evaluated | Coverage record only |

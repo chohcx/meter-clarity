@@ -304,7 +304,7 @@ export default function App() {
         </div>
 
         <section className="privacy-section">
-          <div><p className="eyebrow">LOCAL-FIRST</p><h2>你的生活資料，不必交給另一個雲端。</h2><p>讀值與設定儲存在瀏覽器。清除網站資料仍會刪除紀錄，因此請定期下載加密備份。</p></div>
+          <div><p className="eyebrow">LOCAL-FIRST</p><h2>你的生活資料，不必交給另一個雲端。</h2><p>讀值與設定不會自動上傳，但會以未加密形式存在這個瀏覽器設定檔；能存取此設定檔的人或擴充功能也可能讀取。共用裝置請勿儲存，清除網站資料前請先下載加密備份。</p></div>
           <div className="backup-controls">
             <label>備份密碼<input type="password" minLength={8} autoComplete="new-password" value={backupPassword} onChange={(event) => setBackupPassword(event.target.value)} placeholder="至少 8 個字元" /></label>
             <div>

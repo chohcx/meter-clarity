@@ -46,6 +46,7 @@ test("meets automated WCAG checks and exposes restore to the keyboard", async ({
   const analyze = () => new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"])
     .analyze();
+  await expect(page.getByText(/未加密形式存在這個瀏覽器設定檔/)).toBeVisible();
   expect((await analyze()).violations).toEqual([]);
 
   await page.getByLabel("帳期起始讀值").fill("1000");

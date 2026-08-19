@@ -6,7 +6,7 @@
 - [x] Establish framework-free tariff core and Taiwan provider packs.
 - [x] Add official Taipower and Taipei Water golden examples.
 - [x] Add local-only PWA workflow and encrypted backup.
-- [ ] Add a complete official Taiwan Water bill example.
+- [x] Add a complete official Taiwan Water bill example.
 - [x] Verify encrypted restore, persistence, accessible control names, keyboard focus, and offline reload in desktop Chrome.
 - [x] Add repeatable desktop and mobile browser tests for encrypted restore, offline reload, keyboard access, and WCAG contrast.
 - [ ] Complete a manual screen-reader audit.
@@ -15,8 +15,11 @@
 
 ## v0.1.0 Technical Preview
 
+- [x] Prepare a single disclosure page covering sources, assumptions, unsupported cases, and privacy limitations.
 - [ ] Publish all sources, assumptions, unsupported cases, and privacy limitations.
+- [x] Prepare a reproducible, synthetic-data 60-second demo script.
 - [ ] Demonstrate the main manual-reading flow in about 60 seconds.
+- [x] Prepare an opt-in discrepancy issue form with mandatory de-identification confirmation and no application telemetry.
 - [ ] Collect opt-in, de-identified public discrepancy reports with zero default telemetry.
 
 ## v1.0 Stable

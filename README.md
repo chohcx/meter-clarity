@@ -37,7 +37,7 @@ npm run check
 - 畫面永遠分開「目前估算」、「帳期預測」與「正式帳單」。
 - 地方清除、污水、加壓、折扣等不確定項目必須由使用者依帳單提供，不偷偷假設。
 
-詳見 [架構](docs/architecture.md)、[費率維護](docs/tariffs.md)、[驗證紀錄](docs/verification.md)與[支援範圍](docs/coverage.md)。
+詳見 [Technical Preview 揭露與示範](docs/technical-preview.md)、[架構](docs/architecture.md)、[費率維護](docs/tariffs.md)、[驗證紀錄](docs/verification.md)與[支援範圍](docs/coverage.md)。
 
 ## 公開門檻
 
@@ -47,4 +47,4 @@ npm run check
 
 新架構採 [Apache-2.0](LICENSE)。舊版歷史曾以 MIT 發布，既有授權不追溯撤回。
 
-應用程式預設零遙測；讀值和設定只存在瀏覽器。請勿在 Issue、測試 fixture 或 commit 中放入姓名、地址、水電號、條碼或未遮蔽帳單。
+應用程式預設零遙測；讀值和設定只存在瀏覽器設定檔，但並未在瀏覽器儲存空間內加密。請勿在 Issue、測試 fixture 或 commit 中放入姓名、地址、水電號、條碼或未遮蔽帳單。

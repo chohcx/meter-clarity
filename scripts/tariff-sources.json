@@ -18,5 +18,10 @@
     "id": "taiwan-water-usage-rates",
     "url": "https://www.water.gov.tw/ch/Subject/Detail/1288?nodeId=813",
     "requiredText": ["7.35", "9.45", "11.55", "12.075", "1107.75", "水源保育與回饋費"]
+  },
+  {
+    "id": "taiwan-water-sample-bill",
+    "url": "https://www.water.gov.tw/ch/Subject/Detail/108068?nodeId=813",
+    "requiredText": ["如何閱讀水費帳單", "水費帳單正面", "2025/08/26"]
   }
 ]

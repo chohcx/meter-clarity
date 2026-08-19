@@ -14,4 +14,4 @@ Include affected version, reproduction steps, impact, and suggested mitigation i
 - Imported files are size-limited and must pass schema validation.
 - Provider pages are monitored as untrusted input and cannot automatically change tariff code.
 
-Only the latest private build is currently supported. A public support window will be defined before the technical preview.
+Only the latest private build is currently supported. During the Technical Preview, security fixes will target the default branch and latest tagged preview; older preview builds will not be supported.
