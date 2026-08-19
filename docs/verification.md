@@ -6,10 +6,10 @@ Last reviewed: 2026-08-19.
 
 | Check | Result |
 | --- | --- |
-| TypeScript, 11 unit tests, production/PWA build (`npm run check`) | Pass |
+| TypeScript, 13 unit tests, production/PWA build (`npm run check`) | Pass |
 | Six Playwright checks across desktop and mobile Chromium | Pass |
 | Automated WCAG 2.0/2.1/2.2 A/AA checks | Pass |
-| Three official tariff source probes (`npm run check:tariffs`) | Pass |
+| Four official tariff source probes (`npm run check:tariffs`) | Pass |
 | npm dependency audit (`npm audit --audit-level=high`) | 0 vulnerabilities |
 | GitHub CI for push and pull request | Pass |
 

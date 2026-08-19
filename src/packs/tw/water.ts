@@ -44,13 +44,13 @@ export const taiwanWaterCurrent: TariffVersion<WaterRules> = {
   },
   sources: [
     {
-      title: "經濟部投資臺灣入口網：公用事業費用",
-      url: "https://investtaiwan.nat.gov.tw/showPagecht95?lang=cht&search=95",
+      title: "台灣自來水公司：水管口徑基本費計費標準（CSV）",
+      url: "https://www.water.gov.tw/opendata/syst4.csv",
       retrievedAt: "2026-08-19"
     },
     {
-      title: "經濟部水利署節約用水資訊網：水價計費方式",
-      url: "https://web.wra.gov.tw/wcis/cp.aspx?Create=1&n=7883",
+      title: "台灣自來水公司：水費及各項服務費收費標準",
+      url: "https://www.water.gov.tw/ch/Subject/Detail/1288?nodeId=813",
       retrievedAt: "2026-08-19"
     }
   ]

@@ -1,7 +1,36 @@
 import { describe, expect, it } from "vitest";
-import { estimateWater } from "./water";
+import { estimateWater, taiwanWaterCurrent } from "./water";
 
 describe("Taiwan water tariffs", () => {
+  it("matches Taiwan Water's complete official meter-fee table", () => {
+    expect(taiwanWaterCurrent.rules.monthlyBasicFeeNtd).toEqual({
+      "13": 17.85,
+      "20": 35.7,
+      "25": 66.15,
+      "40": 196.35,
+      "50": 357,
+      "75": 963.9,
+      "100": 1909.95,
+      "150": 5301.45,
+      "200": 10531.5,
+      "250": 18599.7,
+      "300": 29184.75,
+      "350": 41626.2,
+      "400+": 58119.6
+    });
+  });
+
+  it("rounds Taiwan Water's official two-month 110 m3 usage example to whole NTD", () => {
+    const result = estimateWater({
+      provider: "taiwan-water",
+      usageM3: 110,
+      meterDiameterMm: "13",
+      billingMonths: 2,
+      asOf: "2026-08-19"
+    });
+    expect(result.lineItems[0].amountNtd).toBe(1108);
+  });
+
   it("matches Taipei Water's official 25 m3, 20 mm, sewer-connected example", () => {
     const result = estimateWater({
       provider: "taipei-water",

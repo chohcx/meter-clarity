@@ -10,8 +10,13 @@
     "requiredText": ["自105年3月1日起", "6.7", "8.5", "14.0", "20.0"]
   },
   {
-    "id": "taiwan-water",
-    "url": "https://investtaiwan.nat.gov.tw/showPagecht95?lang=cht&search=95",
-    "requiredText": ["台灣自來水公司", "7.35", "9.45", "11.55", "12.075"]
+    "id": "taiwan-water-basic-fees",
+    "url": "https://www.water.gov.tw/opendata/syst4.csv",
+    "requiredText": ["13mm", "17.85", "5,301.45", "18,599.70", "29,184.75", "58,119.60"]
+  },
+  {
+    "id": "taiwan-water-usage-rates",
+    "url": "https://www.water.gov.tw/ch/Subject/Detail/1288?nodeId=813",
+    "requiredText": ["7.35", "9.45", "11.55", "12.075", "1107.75", "水源保育與回饋費"]
   }
 ]
