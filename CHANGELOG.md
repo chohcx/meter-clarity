@@ -4,6 +4,8 @@ All notable MeterClarity changes will be documented here.
 
 ## Unreleased
 
+- Added a dependency-free Windows launcher that builds the production app and opens it in the default browser.
+
 ## 0.1.0 Technical Preview - 2026-08-19
 
 - Renamed the private repository to MeterClarity while preserving legacy history.
