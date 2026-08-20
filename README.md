@@ -6,6 +6,8 @@ MeterClarity 是一個 local-first、可安裝、可離線使用的水電費估�
 
 English documentation: [docs/README.en.md](docs/README.en.md)
 
+[開啟 MeterClarity 網頁版](https://chohcx.github.io/meter-clarity/)
+
 ## 現階段支援
 
 - 台電住宅非時間電價，含夏月／非夏月、累進級距與跨季帳期。

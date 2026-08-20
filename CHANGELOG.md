@@ -5,6 +5,7 @@ All notable MeterClarity changes will be documented here.
 ## Unreleased
 
 - Added a dependency-free Windows launcher that builds the production app and opens it in the default browser.
+- Added an official GitHub Pages workflow and project-site-safe PWA asset paths.
 
 ## 0.1.0 Technical Preview - 2026-08-19
 

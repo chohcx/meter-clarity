@@ -196,9 +196,9 @@ export default function App() {
     <>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="MeterClarity 首頁">
-          <img src="/icon.svg" alt="" /><span>MeterClarity</span>
+          <img src={`${import.meta.env.BASE_URL}icon.svg`} alt="" /><span>MeterClarity</span>
         </a>
-        <span className="preview-badge">PRIVATE BUILD</span>
+        <span className="preview-badge">TECHNICAL PREVIEW</span>
       </header>
 
       <main id="top">
