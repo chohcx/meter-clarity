@@ -6,6 +6,8 @@ MeterClarity 是一個 local-first、可安裝、可離線使用的水電費估�
 
 English documentation: [docs/README.en.md](docs/README.en.md)
 
+[開啟 MeterClarity 網頁版](https://chohcx.github.io/meter-clarity/)
+
 ## 現階段支援
 
 - 台電住宅非時間電價，含夏月／非夏月、累進級距與跨季帳期。
@@ -15,6 +17,10 @@ English documentation: [docs/README.en.md](docs/README.en.md)
 - 裝置內儲存、AES-GCM 加密備份、PWA 離線快取。
 
 不支援時間電價、金門／馬祖水費、供應商帳密登入、官方即時資料、AI 預測或原生 App。估算不等於正式帳單。
+
+## Windows 一鍵開啟
+
+安裝 Node.js 20.19 以上後，在專案資料夾雙擊 **`Open MeterClarity.cmd`**。小工具會在第一次使用時安裝相依套件、建立正式版本，接著自動用瀏覽器開啟 MeterClarity。使用期間請保留服務視窗；關閉視窗即可停止。
 
 ## 開發
 

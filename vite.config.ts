@@ -16,7 +16,7 @@ export default defineConfig({
         background_color: "#f4f7f5",
         display: "standalone",
         lang: "zh-Hant",
-        icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any maskable" }]
+        icons: [{ src: "icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any maskable" }]
       },
       workbox: { navigateFallback: "index.html" }
     })
