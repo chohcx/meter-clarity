@@ -1,19 +1,24 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { withRetries } from "./with-retries.mjs";
 
 const sources = JSON.parse(await readFile(new URL("./tariff-sources.json", import.meta.url), "utf8"));
 const results = [];
 
 for (const source of sources) {
   try {
-    const response = await fetch(source.url, {
-      headers: { "user-agent": "MeterClarity tariff monitor (+https://github.com/chohcx/meter-clarity)" },
-      signal: AbortSignal.timeout(20_000)
-    });
+    const response = await withRetries(() =>
+      fetch(source.url, {
+        headers: { "user-agent": "MeterClarity tariff monitor (+https://github.com/chohcx/meter-clarity)" },
+        signal: AbortSignal.timeout(20_000)
+      })
+    );
     const body = await response.text();
     const missing = source.requiredText.filter((text) => !body.includes(text));
     results.push({ id: source.id, url: source.url, status: response.status, missing, ok: response.ok && missing.length === 0 });
   } catch (error) {
-    results.push({ id: source.id, url: source.url, ok: false, error: error instanceof Error ? error.message : String(error) });
+    const message = error instanceof Error ? error.message : String(error);
+    const cause = error instanceof Error && error.cause instanceof Error ? error.cause.message : "";
+    results.push({ id: source.id, url: source.url, ok: false, error: cause ? `${message}: ${cause}` : message });
   }
 }
 
