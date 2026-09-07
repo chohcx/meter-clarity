@@ -23,7 +23,7 @@ jobs:
         continue-on-error: true
         run: npm run check:tariffs
       - if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: tariff-monitor-report
           path: tmp/tariff-monitor-report.json
